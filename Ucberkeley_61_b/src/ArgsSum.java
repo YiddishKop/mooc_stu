@@ -1,16 +1,15 @@
 
+// give parameters 111 222 333 when compiling source code
 public class ArgsSum {
 
 	public static void main(String[] args) {
-		// DONE Auto-generated method stub
 		int index = 0;
-		int total = 0;
-		
+		int sum = 0;
 		while (index < args.length) {
-			total = total + Integer.parseInt(args[index]);
-			index += 1;
+			sum += Integer.parseInt(args[index]);
+			index ++;
 		}
-		System.out.println(total);
+		System.out.println("Sum of args: " + sum);
 	}
 
 }
