@@ -3,6 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Lec_4"/>
 	<classpathentry kind="src" path="Discussion_1"/>
+	<classpathentry kind="src" path="lec-2"/>
+	<classpathentry kind="src" path="lec-7"/>
+	<classpathentry kind="src" path="lec-6"/>
+	<classpathentry kind="src" path="lec-5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
