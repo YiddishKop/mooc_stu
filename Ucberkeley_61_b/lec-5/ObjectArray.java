@@ -1,3 +1,4 @@
+// 这个类的目的主要是判断，Object数组是否可以混合各种类型，primitive 和 reference
 public class ObjectArray {
 	
 	public static void main(String[] args) {
