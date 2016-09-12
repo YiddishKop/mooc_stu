@@ -7,8 +7,8 @@ public class PascalTriangle {
 		for (int i = 0; i < layer; i++) {
 			psc[i] = new int[i+1]; // 这里i+1是指元素个数，千万别搞混
 			
-			/* TODO
-			 * 下面这部分代码堪称 order of computation 的典范
+			/* TODO 下面这部分代码堪称 order of computation 的典范
+			 * 
 			 * for循环的意思就是计算非首位元素的，根据模块化思想可以单独抓出来
 			 * 1. 计算首元素 （=1）
 			 * 2. 计算中间元素
