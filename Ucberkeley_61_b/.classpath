@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="Lec-4"/>
 	<classpathentry kind="src" path="lec-1"/>
 	<classpathentry kind="src" path="Discussion_1"/>
 	<classpathentry kind="src" path="lec-2"/>
@@ -8,6 +7,8 @@
 	<classpathentry kind="src" path="lec-6"/>
 	<classpathentry kind="src" path="lec-5"/>
 	<classpathentry kind="src" path="lec-8"/>
+	<classpathentry kind="src" path="lec-4"/>
+	<classpathentry kind="src" path="lec-3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
