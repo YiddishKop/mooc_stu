@@ -1,8 +1,7 @@
 /** 冒泡排序（把功能独立成函数非常好）
  * */
 public class Mystery {
-	/** 求出从 k+1 位置 到 数组最后 位置，最小的数放在x，索引放在answer
-		返回answer */
+	/** 求出从 k 位置 到 数组最后 最小的数，返回其索引*/
 	public static int mystery(int[] inputArray, int k) {
 		int x = inputArray[k];  // 把输入的 数组的第k个元素赋值给x
 		int answer = k; // 把k赋值给answer
