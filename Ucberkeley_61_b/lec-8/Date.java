@@ -32,14 +32,14 @@ public class Date {
 	public class EvilTamperer{
 		public void tamper() {
 			Date d = new Date(1, 1, 2006);
-			d.day = 100;    // TODO  设置私有数据成功
+			d.day = 100;                                               // TODO  设置私有数据成功
 			d.setMonth(0); 
 			System.out.println("hi, this is EvilTamper: "+d.getDay());
 		}
 	}
 	public static void main(String[] args) {
 		Date dt = new Date();
-		EvilTamperer et  = dt.new EvilTamperer(); // TODO 如何创建 Inner-class 对象
-		et.tamper(); // TODO  设置私有数据成功
+		EvilTamperer et  = dt.new EvilTamperer();                      // TODO 如何创建 Inner-class 对象
+		et.tamper(); 							                       // TODO 设置私有数据成功
 	}
 }

@@ -1,14 +1,13 @@
 /**
  * 练习排序算法： 
- * 排序算法一定要把数组划分为 unsorted 和 sorted 部分
- * 并用索引标记出边界
- * 1.冒泡：不断把待排序的最小数字从后往前挪到sorted的末尾
- * 2.插入：不断把 unsorted 的首个元素插入 sorted 的适当位置
- * 3.选择：不断从 unsorted 选择最小放在 unsorted 的首位
+ * 排序算法一定要把数组划分为 u的最小数字从后往前挪到sorted的末尾
+ * 1.冒泡：不断从『unsorted』的尾元素，通过相邻交换，换到 『sorted』 部分的尾部
+ * 2.插入：不断把『unsorted』的首元素，通过比较大小，插入 『sorted』 的适当位置
+ * 3.选择：不断在『unsorted』标记最小元素，移到 『unsorted』 的首部
  * 4.快速：pivot 把数组分成左右两个部分 包含(quicksortStep返回pivot在数组中的位置)  5千万int 用时60s
  * 5.归并：不断二分，再不断归并 包含(mergeStep)， 归并毫无疑问是最快的， 5千万int 用时 10s
  * ----- map2id 是把 算法 名字 映射到 id，然后匹配 switch 来决定使用哪个排序算法（整复杂了）
- * ----- 可以通过 testSort() 函数来更改待排序数组大小，来查看各个算法的排序效率
+ * ----- testSort() 函数来更改待排序数组大小，来查看各个算法的排序效率
  */
 public class SortPractice {
 	public static void bubbleSort(int[] A) {
@@ -18,14 +17,14 @@ public class SortPractice {
 		int tmp;
 		while(index < A.length) {
 			int tail = A.length - 1;
-			while(tail > index) {            // TODO 这里的标记一定不能是 >=,而只能是 >，否则越界
+			while(tail > index) {             // TODO 这里的标记一定不能是 >=,而只能是 >，否则越界
 				if(A[tail] < A[tail-1]) {
 					tmp = A[tail];
 					A[tail] = A[tail-1];
 					A[tail-1] = tmp;
 				}
 				tail--;
-			}                                // 这个循环执行完毕，把unsorted中最小的元素换到index位置
+			}                                 // 这个循环执行完毕，把unsorted中最小的元素换到index位置
 			index++;
 		}
 	}
