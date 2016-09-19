@@ -1,5 +1,5 @@
 // ListNode: item, next
-public class ListNode {
+public class ListNode<Blop> {
 	int item;
 	ListNode next;
 	
@@ -84,6 +84,28 @@ public class ListNode {
 			dincrList(L.next, x);
 		}
 	}
+	/** Destructively squares each element of the given IntList L.
+	* Don¡¯t use ¡¯new¡¯; modify the original IntList.
+	* Should be written iteratively. */
+	public static ListNode SquareDestructive(ListNode L) {
+		if(L.next == null) {
+			L.item = L.item * L.item;
+			return L;
+		}else {
+			L.item = L.item * L.item;
+			return SquareDestructive(L.next);
+		}
+	}
+	/** Non-destructively squares each element of the given IntList L.
+	* Don¡¯t modify the given IntList.
+	* Should be written recursively*/
+	public static ListNode SquareNonDestructive(ListNode L) {
+		if(L.next == null) {
+			return new ListNode(L.item * L.item, null);
+		}else {
+			return new ListNode(L.item * L.item, SquareNonDestructive(L.next));
+		}
+	}
 	// µ¥Ôª²âÊÔ
 	public static void main(String args[]) {
 		ListNode ln = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
@@ -92,7 +114,12 @@ public class ListNode {
 		Q.display();
 		dincrList(Q, 10);
 		Q.display();
-		
+		SquareDestructive(Q);
+		Q.display();
+		ln.display();
+		ListNode R = SquareNonDestructive(ln);
+		ln.display();
+		R.display();
 	}
 }
 

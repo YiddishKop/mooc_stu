@@ -2,7 +2,7 @@
 	1. How to represent null list;
 	2. insert new node to beginning of list */
 
-public class SList {
+public class SList<Blop> {
 	// FILEDS
 	int size;
 	ListNode head;

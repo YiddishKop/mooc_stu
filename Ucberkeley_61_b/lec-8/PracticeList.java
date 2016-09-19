@@ -5,6 +5,12 @@
  */
 public class PracticeList {
 	public static void main(String[] args) {
+//		testSList();
+		PracticeList pl = new PracticeList();
+		DListNode dlNode = pl.new DListNode(4);
+	}
+	
+	public static void testSList() {
 		PracticeList pl = new PracticeList();
 		SListNode SL_node = pl.new SListNode(4, 
 				pl.new SListNode(8, 
@@ -17,6 +23,9 @@ public class PracticeList {
 		SL.disp_SList();
 		SList SL2 = pl.new SList(SL.head.incrNewList(SL.head, 20));
 		SL2.disp_SList();
+		SL2.insertBack(12);
+		SL2.disp_SList();
+		System.out.println(SL2.sizeRecursive());
 	}
 	public class SListNode{
 		public int item;
@@ -30,7 +39,7 @@ public class PracticeList {
 			this.item = value;
 			this.next = null;
 		}
-		//-------------------------------------
+		//--------------------------------------
 		public int size() {                            // SListNode的 size方法只能统计出当下节点之后有几个节点
 			if(next == null) {
 				return 1;
@@ -60,13 +69,14 @@ public class PracticeList {
 				next.incrList(incr_num);
 			}
 		}
-		public  SListNode incrNewList(SListNode sl, int incr_num) {    // 新建一个List，每个节点的 item增加 incr_num
+		public SListNode incrNewList(SListNode sl, int incr_num) {    // 新建一个List，每个节点的 item增加 incr_num
 			if(sl.next == null) {
 				return new SListNode(sl.item + incr_num, null);
 			}else {
 				return new SListNode(sl.item + incr_num, incrNewList(sl.next, incr_num));
 			}
 		}
+
 	}
 	public class SList{
 		private SListNode head;
@@ -93,10 +103,43 @@ public class PracticeList {
 		}
 		public void disp_SList() {
 			SListNode sl = head;
+			System.out.println("-------Display----------");
 			while(sl != null) {
 				System.out.println("item: " + sl.item);
 				sl = sl.next;
 			}
+		}
+		public void insertBack(int val) {
+			SListNode slNode= head;
+			while (slNode.next != null) {
+				slNode = slNode.next;
+			}                                          // 这个循环找结束后，slNode ref to tail of list
+			slNode.insertAfterThis(val);
+		}
+		public int size() {
+			SListNode head_node = head;
+			int size = 1;                           // head_node自己要算，所以从1开始
+			while(head_node.next != null) {
+				size++;
+				head_node = head_node.next;
+			}
+			return size;
+		}
+		/**
+		 * when working with naked recursive data structure gods,
+		 * we usually create a private helper method deal with them
+		 * directly
+		 * @return
+		 */
+		private int listNodeSize(SListNode n) {
+			if(n.next == null) {
+				return 1;
+			}else {
+				return 1 + listNodeSize(n.next);
+			}
+		}
+		public int sizeRecursive() {
+			return listNodeSize(head);
 		}
 	}
 	public class DListNode{
@@ -128,6 +171,11 @@ public class PracticeList {
 			this.size = 0;
 		}
 		//------------------------------
-		
+		public void insertBack(int val) {             // 新建节点并在尾部节点之后插入
+			DListNode new_node = new DListNode(val, 
+					sentinel.prev.prev, sentinel.prev.next);
+			sentinel.prev = new_node;
+			sentinel.prev.prev = new_node;
+		}
 	}
 }
