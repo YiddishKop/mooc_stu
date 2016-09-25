@@ -1,4 +1,12 @@
-
+/**
+ * 用动态数组来实现链表，优点：
+ * 1. 检索任意位置非常快；
+ * 2. 从尾部删除元素，就直接置0
+ * 3. 
+ * @author yiddi
+ *
+ * @param <Glorb>
+ */
 public class AList<Glorb> {
 	private Glorb[] items;
 	private int size;
