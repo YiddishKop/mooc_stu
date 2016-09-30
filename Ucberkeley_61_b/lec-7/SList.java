@@ -1,104 +1,159 @@
-/* 用来解决SListNode 中出现的两个问题：
-	1. How to represent null list;
-	2. insert new node to beginning of list */
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-public class SList<Blorp> implements List61B<Blorp>{
-	// INNER-CLASS: SListNode
-	public class SListNode{
+import java.awt.DisplayMode;
+
+public class SList {
+	private class SNode {
 		public int item;
-		public SListNode next;
-		//-------------------------------------
-		public SListNode(int value, SListNode ref) {
-			this.item = value;
-			this.next = ref;
-		}
-		public SListNode(int value) {
-			this.item = value;
-			this.next = null;
-		}
-		//--------------------------------------
-		public int size() {                            // SListNode的 size方法只能统计出当下节点之后有几个节点
-			if(next == null) {
-				return 1;
-			}else {
-				return next.size() + 1;                // Recursion 有点像 “踢皮球”“推卸责任”
-			}
-		}
-		public int sizeIterative() {
-			int node_num = 0;
-			while(next != null) {
-				node_num ++;
-			}
-			return node_num;
-		}
-		public void insertAfterThis(int val) {          // 把item为val的节点，插入当下节点之后
-			next = new SListNode(val, next);
-		}
-		public void deleteAfterThis() {                 // 删除当前节点的下一个节点
-			next = this.next.next;
-		}
-		public void incrList(int incr_num) {            // 在原来List上每个节点的 item增加 incr_num
-			if (next == null) {
-				item += incr_num;
-				return;
-			}else {
-				item += incr_num;
-				next.incrList(incr_num);
-			}
-		}
-		public SListNode incrNewList(SListNode sl, int incr_num) {    // 新建一个List，每个节点的 item增加 incr_num
-			if(sl.next == null) {
-				return new SListNode(sl.item + incr_num, null);
-			}else {
-				return new SListNode(sl.item + incr_num, incrNewList(sl.next, incr_num));
-			}
-		}
+		public SNode next;
 
+		public SNode(int item, SNode next) {
+			this.item = item;
+			this.next = next;
+		}
+		public void insertAfter(int item) {
+			next = new SNode(item,next);
+		}
 	}
-	// FILEDS
-	private SListNode head;
-	public int size;
+
+	private SNode front;
+
+	public void insertFront(int x) {
+		front = new SNode(x, front);
+	}
+	public int size() {
+		int size = 1;
+		SNode sn= front;
+		while(sn.next != null) {
+			size += 1;
+			sn = sn.next;
+		}
+		return size;
+	}
+	public void display() {
+		int num = 0;
+		SNode sn = front;
+		while (num < size()) {
+			System.out.printf("%dth item is: %d\n", num, sn.item);
+			sn = sn.next;
+			num++;
+		}
+	}
+	public void displayRecursive() {
+		/*
+		 * 1. 打印当前元素
+		 * 2. 把下一个元素 赋值给 front
+		 * 3. 再次执行 displayRecursive()
+		 */
+		if (front.next == null) {
+			System.out.println(front.item);
+			return;
+		}else {
+			System.out.println(front.item);
+			front = front.next;
+			displayRecursive();
+		}
+	}
+	public SNode getTail() {
+		SNode sn = front;
+		while(sn.next.next != null) {
+			sn = sn.next;
+		}
+		return sn;
+	}
+	// 倒置SList 不能新建 SNode
+	public void reverse() {
+		/*
+		 * linked list 的倒置，只需要把 next 指向前一个元素即可
+		 */
+		SNode ah = front;
+		SNode tmp = ah.next;
+		ah.next = null;
+		SNode af = tmp;
+		while(af != null) {
+			tmp = af.next;
+			af.next = ah;
+			ah = af;
+			af = tmp;
+		}
+		front = ah;
+	}
 	
-	// CTOR
-	public SList() {
-		size = 0;
-		head = null;
+	public void reverseRecursive() {
+		if (front.next == null) {
+			return;
+		}else {
+			SNode a = front;
+			SNode b = front.next;
+			front.next = null;
+			front = b;
+			reverseRecursive();
+			b.next = a;
+		}
 	}
-	public SList(SListNode head_node) {
-		head = head_node;
-		size = head_node.size();
+	// Node计数从1开始，insert(0,1) 就是在 1st node 后插入新节点
+	public void insert(int item, int position) {
+		/*
+		 *  判断postition < 0 -> error; 
+		 *               > SList.size -> error
+		 *               else 遍历到 position 节点 执行insertAfter(item)
+		 */
+		int num = 1;         // 位置标记
+		SNode sn = front;    // SList游标
+		if (position < 0) {
+			System.out.println("ERROR, < 0");
+		}else if (position > this.size()) {
+			System.out.println("ERROR, exceed range!");
+		}else if(position == 0){
+			front = new SNode(item, front);
+		}else{
+			while (num < position) {
+				sn = sn.next;
+				num++;
+			}
+			sn.insertAfter(item);
+		}
 	}
-	// METHODS
-	@Override
-	public void insertFront(Blorp x){
-		
+	public static void testReverse() {
+		System.out.println("testReverse");
+		SList sl = new SList();
+		sl.insertFront(4);
+		sl.insertFront(3);
+		sl.insertFront(2);
+		sl.insertFront(1);
+		sl.insertFront(0);
+		sl.display();
+//		sl.reverse();
+		sl.reverseRecursive();
+		sl.display();
 	}
-	@Override
-	public Blorp getFront(){
-		return null;
+	public static void testInsert() {
+		System.out.println("testInsert:");
+		SList sl = new SList();
+		sl.insertFront(4);
+		sl.insertFront(3);
+		sl.insertFront(2);
+		sl.insertFront(1);
+		sl.insertFront(0);
+		sl.display();
+		sl.insert(5, 1);
+		sl.display();
 	}
-	@Override
-	public void insertBack(Blorp x){
-		
-	}
-	@Override
-	public Blorp getBack(){
-		return null;
-	}
-	@Override
-	public Blorp deleteBack(){
-		return null;
-	}
-	@Override
-	public int size(){
-		return 0;
-	}
-	@Override
-	public Blorp get(int position){
-		return null;
-	}
-	@Override
-	public void insert(Blorp item, int position){
-		
+	public static void testDisplayRecursive() {
+		System.out.println("test displayRecursive:");
+		SList sl = new SList();
+		sl.insertFront(4);
+		sl.insertFront(3);
+		sl.insertFront(2);
+		sl.insertFront(1);
+		sl.insertFront(0);
+		sl.display();
+		sl.displayRecursive();
+	} 
+	public static void main(String[] args) {
+//		testInsert();
+		testReverse();
+//		testDisplayRecursive();
 	}
 }
