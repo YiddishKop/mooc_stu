@@ -1,6 +1,6 @@
 from operator import add, sub
 
-# Q1
+# DONE Q1
 def a_plus_abs_b(a, b):
     """Return a+abs(b), but without calling abs.
 
@@ -10,12 +10,12 @@ def a_plus_abs_b(a, b):
     5
     """
     if b < 0:
-        f = sub(a, b)
+        f = sub
     else:
-        f = add(a, b)
+        f = add
     return f(a, b)
 
-# Q2
+# DONE Q2
 def two_of_three(a, b, c):
     """Return x*x + y*y, where x and y are the two largest members of the
     positive numbers a, b, and c.
@@ -42,7 +42,7 @@ def two_of_three(a, b, c):
     elif c >= b and b >= a:
         return c * c + b * b
 
-# TODO Q3
+# DONE Q3
 def largest_factor(n):
     """Return the largest factor of n*n-1 that is smaller than n.
     >>> largest_factor(4) # n*n-1 is 15; factors are 1, 3, 5, 15
@@ -50,6 +50,7 @@ def largest_factor(n):
     >>> largest_factor(9) # n*n-1 is 80; factors are 1, 2, 4, 5, 8, 10, ...
     8
     """
+    return n - 1
 
 # TODO Q4  
 def if_function(condition, true_result, false_result):
@@ -84,14 +85,16 @@ def with_if_function():
     return if_function(c(), t(), f())
 
 def c():
-    "*** YOUR CODE HERE ***"
+    return 1
 
 def t():
-    "*** YOUR CODE HERE ***"
+    return -1
 
 def f():
-    "*** YOUR CODE HERE ***"
+    return 0
 
+print(with_if_function())
+print(with_if_statement())
 # TODO Q5
 def hailstone(n):
     """Print the hailstone sequence starting at n and return its
@@ -108,7 +111,7 @@ def hailstone(n):
     >>> a
     7
     """
-    "*** YOUR CODE HERE ***"
+    
     
 # TODO Q6
 """
